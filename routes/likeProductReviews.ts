@@ -22,6 +22,9 @@ export function likeProductReviews () {
     }
 
     try {
+      if (!db.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'Invalid ID format' })
+      }
       const review = await db.reviewsCollection.findOne({ _id: db.ObjectId(id) })
       if (!review) {
         return res.status(404).json({ error: 'Not found' })
