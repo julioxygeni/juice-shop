@@ -35,9 +35,9 @@ export class LastLoginIpComponent {
       payload = jwtDecode(token)
       if (payload.data.lastLoginIp) {
         // Fix: Use textContent to safely set the text without interpreting it as HTML
-        const container = document.createElement('div');
-        container.textContent = payload.data.lastLoginIp;
-        this.lastLoginIp = container.innerHTML;
+        const container = document.createElement('div')
+        container.textContent = payload.data.lastLoginIp
+        this.lastLoginIp = container.innerHTML
       }
     }
   }
