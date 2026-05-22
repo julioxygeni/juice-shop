@@ -34,8 +34,10 @@ export class LastLoginIpComponent {
     if (token) {
       payload = jwtDecode(token)
       if (payload.data.lastLoginIp) {
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        this.lastLoginIp = this.sanitizer.bypassSecurityTrustHtml(`<small>${payload.data.lastLoginIp}</small>`)
+        // Fix: Use textContent to safely set the text without interpreting it as HTML
+        const container = document.createElement('div');
+        container.textContent = payload.data.lastLoginIp;
+        this.lastLoginIp = container.innerHTML;
       }
     }
   }
