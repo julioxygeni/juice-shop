@@ -52,7 +52,9 @@ export class DataExportComponent implements OnInit {
 
   getNewCaptcha () {
     this.imageCaptchaService.getCaptcha().subscribe((data: any) => {
-      this.captcha = this.sanitizer.bypassSecurityTrustHtml(data.image)
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data.image, 'text/html');
+      this.captcha = doc.body.textContent || '';
     })
   }
 
